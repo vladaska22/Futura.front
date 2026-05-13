@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Основний контейнер */
+.verification-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  background: 
+    radial-gradient(ellipse at 0% 0%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 100%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+    linear-gradient(135deg, #4c1d95 0%, #2e1065 100%);
+}
+
+/* Фоновий глоу */
+.verification-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.verification-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: glowBreathe 4s ease-in-out infinite;
+}
+
+@keyframes glowBreathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Основний контейнер верифікації */
+.verification-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 20px;
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Лоадер контейнер */
+.loader-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.loader-container.complete {
+  width: 220px;
+  height: 220px;
+  animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Кільцевий спіннер */
+.spinner-ring {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 3px solid rgba(168, 85, 247, 0.2);
+  border-top: 3px solid rgba(168, 85, 247, 0.8);
+  border-right: 3px solid rgba(236, 72, 153, 0.6);
+  border-radius: 50%;
+  animation: spin 2.5s linear infinite;
+  box-shadow: 
+    0 0 20px rgba(168, 85, 247, 0.4),
+    inset 0 0 20px rgba(168, 85, 247, 0.1);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Внутрішній кільце спіннера */
+.spinner-ring-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.6);
+  border-radius: 50%;
+  animation: spinReverse 3.5s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spinReverse {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+/* Центральний логотип */
+.logo-center {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(139, 92, 246, 0.2));
+  border: 2px solid rgba(168, 85, 247, 0.4);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 
+    0 8px 32px rgba(168, 85, 247, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  z-index: 2;
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.logo-letter {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #d8b4fe 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4));
+}
+
+/* Пульсуючий фон лоадера */
+.pulse-ring {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  border-radius: 50%;
+  animation: pulsing 2s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+}
+
+@keyframes pulsing {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Зелена галочка успіху */
+.success-check {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 
+    0 20px 60px rgba(16, 185, 129, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  animation: successScale 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes successScale {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Пульсуючий фон для успіху */
+.success-pulse {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border: 3px solid rgba(16, 185, 129, 0.6);
+  border-radius: 50%;
+  animation: successPulse 2s ease-in-out infinite;
+}
+
+@keyframes successPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.3;
+  }
+}
+
+/* Текстовий контент */
+.verification-content {
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.verification-title {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.verification-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+.success-message {
+  font-size: 16px;
+  color: rgba(16, 185, 129, 0.8);
+  font-weight: 500;
+  animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Контейнер етапів */
+.stages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  max-width: 100%;
+}
+
+/* Окремий етап */
+.stage-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+}
+
+.stage-item.completed {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.stage-item.active {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+}
+
+.stage-icon-done {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.stage-icon-loading {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  border-top: 2px solid rgba(168, 85, 247, 0.8);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  flex-shrink: 0;
+}
+
+.stage-icon-pending {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.stage-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.stage-item.completed .stage-text {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.stage-item.active .stage-text {
+  color: white;
+  font-weight: 600;
+}
+
+/* Мобільна адаптація */
+@media (max-width: 640px) {
+  .verification-container {
+    gap: 30px;
+    padding: 30px 15px;
+  }
+
+  .loader-container {
+    width: 160px;
+    height: 160px;
+  }
+
+  .loader-container.complete {
+    width: 180px;
+    height: 180px;
+  }
+
+  .spinner-ring {
+    width: 140px;
+    height: 140px;
+  }
+
+  .pulse-ring {
+    width: 160px;
+    height: 160px;
+  }
+
+  .logo-center {
+    width: 80px;
+    height: 80px;
+  }
+
+  .logo-letter {
+    font-size: 40px;
+  }
+
+  .success-check {
+    width: 110px;
+    height: 110px;
+  }
+
+  .success-check svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .success-pulse {
+    width: 110px;
+    height: 110px;
+  }
+
+  .verification-title {
+    font-size: 28px;
+  }
+
+  .stages-container {
+    max-width: 100%;
+  }
+
+  .verification-glow {
+    width: 400px;
+    height: 400px;
+  }
+}
