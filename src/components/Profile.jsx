@@ -1,17 +1,15 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 
 const Profile = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#240b45', color: 'white', padding: '40px', fontFamily: 'system-ui, sans-serif' }}>
-      <button onClick={() => navigate(-1)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <ArrowLeft size={24} /> Назад
+    <div style={{ minHeight: '100vh', backgroundColor: '#1a0633', color: 'white', padding: '40px', fontFamily: 'system-ui, sans-serif' }}>
+      <button onClick={() => navigate(-1)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer', fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        ← Назад до дашборду
       </button>
-      <h1 style={{ marginTop: '40px' }}>Мій Профіль</h1>
-      <p>Тут будуть налаштування профілю.</p>
+      <h1 style={{ marginTop: '40px', fontSize: '32px', fontWeight: 'bold' }}>Мій Профіль</h1>
+      <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '10px' }}>Тут будуть налаштування профілю.</p>
     </div>
   );
 };
