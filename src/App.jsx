@@ -10,6 +10,7 @@ import Notifications from './components/Notifications';
 import InvoiceCreation from './components/Invoicecreation';
 import GetPayoutPage from './components/Getpayoutmodal';
 import SuccessScreen from './components/SuccessScreen';
+import InvestorDashboard from './components/InvestorDashboard';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/create-invoice" element={<InvoiceCreation />} />
         <Route path="/invoice-success" element={<SuccessScreen />} />
         <Route path="/get-payout" element={<GetPayoutPage />} />
+        <Route path="/investor-dashboard" element={<InvestorDashboard />} />
       </Routes>
     </Router>
   );

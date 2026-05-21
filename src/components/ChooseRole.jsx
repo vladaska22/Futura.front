@@ -29,17 +29,22 @@ const ChooseRole = () => {
   };
 
   const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log({
-      role: selectedRole,
-      ipn: formData.ipn,
-      kved: formData.kved,
-      iban: formData.iban
-    });
-    
-    // ОСЬ ТУТ МАГІЯ: перекидаємо на імітацію перевірки
-    navigate('/verifying'); 
-  };
+  e.preventDefault();
+  
+  console.log({
+    role: selectedRole,
+    ipn: formData.ipn,
+    kved: formData.kved,
+    iban: formData.iban
+  });
+  
+  // Додаємо перевірку ролі:
+  if (selectedRole === 'investor') {
+    navigate('/investor-dashboard'); // Перехід для інвестора
+  } else {
+    navigate('/verifying'); // Перехід для ФОП (або інших)
+  }
+};
 
   const handleBackClick = () => {
     setSelectedRole(null);
