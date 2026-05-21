@@ -27,7 +27,7 @@ const GetPayoutPage = ({ availableBalance = 15000 }) => {
   const [step, setStep] = useState('amount');
   const [formData, setFormData] = useState({
     amount: '',
-    method: 'card',
+    method: 'iban',
     cardNumber: '',
     cardHolder: '',
     expiryDate: '',
@@ -352,6 +352,10 @@ const GetPayoutPage = ({ availableBalance = 15000 }) => {
   // RENDER HELPER: STEP 2 - METHOD
   // ============================================================================
 
+ // ============================================================================
+  // RENDER HELPER: STEP 2 - METHOD (ТІЛЬКИ IBAN)
+  // ============================================================================
+
   const renderMethodStep = () => (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -371,162 +375,45 @@ const GetPayoutPage = ({ availableBalance = 15000 }) => {
 
       <div>
         <p className="text-sm font-semibold text-white mb-3">
-          Payout Method <span className="text-red-400">*</span>
+          Payout Method
         </p>
-
-        <div className="grid grid-cols-2 gap-4">
-          <button
-            type="button"
-            onClick={() => {
-              setFormData((prev) => ({ ...prev, method: 'card' }));
-              setErrors({});
-            }}
-            className={`p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-2 ${
-              formData.method === 'card'
-                ? 'border-cyan-400/50 bg-cyan-400/10'
-                : 'border-white/10 bg-white/5 hover:border-white/20'
-            }`}
-          >
-            <CreditCard
-              className={`w-5 h-5 ${
-                formData.method === 'card'
-                  ? 'text-cyan-400'
-                  : 'text-white/50'
-              }`}
-            />
-            <span className="text-white font-medium text-sm">Bank Card</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              setFormData((prev) => ({ ...prev, method: 'iban' }));
-              setErrors({});
-            }}
-            className={`p-4 rounded-xl border-2 transition-all flex flex-col items-center gap-2 ${
-              formData.method === 'iban'
-                ? 'border-purple-400/50 bg-purple-400/10'
-                : 'border-white/10 bg-white/5 hover:border-white/20'
-            }`}
-          >
-            <Shield
-              className={`w-5 h-5 ${
-                formData.method === 'iban'
-                  ? 'text-purple-400'
-                  : 'text-white/50'
-              }`}
-            />
-            <span className="text-white font-medium text-sm">IBAN</span>
-          </button>
+        {/* Замість вибору кнопки, просто показуємо вибраний метод */}
+        <div className="p-4 rounded-xl border-2 border-purple-400/50 bg-purple-400/10 flex items-center gap-3">
+          <Shield className="w-5 h-5 text-purple-400" />
+          <span className="text-white font-medium text-sm">IBAN Transfer</span>
         </div>
       </div>
 
-      {/* Payment Details */}
-      <div className="space-y-4">
-        {formData.method === 'card' ? (
-          <>
-            <div>
-              <label className="block text-xs font-semibold text-white/70 mb-2">
-                Card Number *
-              </label>
-              <input
-                type="text"
-                name="cardNumber"
-                placeholder="1234 5678 9012 3456"
-                value={formData.cardNumber}
-                onChange={handleInputChange}
-                maxLength="19"
-                className={`w-full px-4 py-3 bg-white/5 border-2 rounded-lg text-white placeholder-white/30 transition-all ${
-                  errors.cardNumber
-                    ? 'border-red-400/50 focus:outline-none'
-                    : 'border-white/10 focus:border-cyan-400/50 focus:outline-none'
-                }`}
-              />
-              {errors.cardNumber && (
-                <p className="text-red-400 text-xs mt-1">{errors.cardNumber}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-white/70 mb-2">
-                Cardholder Name *
-              </label>
-              <input
-                type="text"
-                name="cardHolder"
-                placeholder="JOHN DOE"
-                value={formData.cardHolder}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-3 bg-white/5 border-2 rounded-lg text-white placeholder-white/30 transition-all ${
-                  errors.cardHolder
-                    ? 'border-red-400/50 focus:outline-none'
-                    : 'border-white/10 focus:border-cyan-400/50 focus:outline-none'
-                }`}
-              />
-              {errors.cardHolder && (
-                <p className="text-red-400 text-xs mt-1">{errors.cardHolder}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-white/70 mb-2">
-                Expiry Date (MM/YY) *
-              </label>
-              <input
-                type="text"
-                name="expiryDate"
-                placeholder="MM/YY"
-                value={formData.expiryDate}
-                onChange={handleInputChange}
-                maxLength="5"
-                className={`w-full px-4 py-3 bg-white/5 border-2 rounded-lg text-white placeholder-white/30 transition-all ${
-                  errors.expiryDate
-                    ? 'border-red-400/50 focus:outline-none'
-                    : 'border-white/10 focus:border-cyan-400/50 focus:outline-none'
-                }`}
-              />
-              {errors.expiryDate && (
-                <p className="text-red-400 text-xs mt-1">{errors.expiryDate}</p>
-              )}
-            </div>
-          </>
-        ) : (
-          <div>
-            <label className="block text-xs font-semibold text-white/70 mb-2">
-              IBAN Code *
-            </label>
-            <input
-              type="text"
-              name="ibanCode"
-              placeholder="DE89370400440532013000"
-              value={formData.ibanCode}
-              onChange={handleInputChange}
-              className={`w-full px-4 py-3 bg-white/5 border-2 rounded-lg text-white placeholder-white/30 transition-all ${
-                errors.ibanCode
-                  ? 'border-red-400/50 focus:outline-none'
-                  : 'border-white/10 focus:border-cyan-400/50 focus:outline-none'
-              }`}
-            />
-            {errors.ibanCode && (
-              <p className="text-red-400 text-xs mt-1">{errors.ibanCode}</p>
-            )}
-          </div>
+      {/* IBAN Input Field */}
+      <div>
+        <label className="block text-xs font-semibold text-white/70 mb-2">
+          IBAN Code *
+        </label>
+        <input
+          type="text"
+          name="ibanCode"
+          placeholder="DE89370400440532013000"
+          value={formData.ibanCode}
+          onChange={handleInputChange}
+          className={`w-full px-4 py-3 bg-white/5 border-2 rounded-lg text-white placeholder-white/30 transition-all ${
+            errors.ibanCode
+              ? 'border-red-400/50 focus:outline-none'
+              : 'border-white/10 focus:border-cyan-400/50 focus:outline-none'
+          }`}
+        />
+        {errors.ibanCode && (
+          <p className="text-red-400 text-xs mt-1">{errors.ibanCode}</p>
         )}
       </div>
 
-      {/* Security Tips */}
       <div className="bg-amber-400/10 border border-amber-400/20 rounded-lg p-4">
         <div className="flex gap-3">
           <Info className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
           <div>
-            <p className="text-amber-200 font-medium text-sm mb-2">
-              Security Tips:
+            <p className="text-amber-200 font-medium text-sm mb-1">Note:</p>
+            <p className="text-amber-100/70 text-xs">
+              Ensure the IBAN belongs to the account holder. International transfers may take longer.
             </p>
-            <ul className="text-amber-100/70 text-xs space-y-1">
-              <li>• FuturaFlow will never ask for your CVV or PIN</li>
-              <li>• Verify all details before confirming</li>
-              <li>• Check bank statements after transfer</li>
-            </ul>
           </div>
         </div>
       </div>

@@ -93,7 +93,7 @@ const ChooseRole = () => {
                   <div className="avatar">
                     <img src="/investor.png" alt="Інвестор" />
                   </div>
-                  <div className="role-name">Інвестор</div>
+                  <div className="role-name">Кредитор</div>
                 </div>
               </div>
             </div>
@@ -116,21 +116,13 @@ const ChooseRole = () => {
               <input
                 type="text"
                 name="kved"
-                placeholder="КВЕД"
+                placeholder="ФІО"
                 className="fop-input"
                 value={formData.kved}
                 onChange={handleInputChange}
                 required
               />
-              <input
-                type="text"
-                name="iban"
-                placeholder="IBAN"
-                className="fop-input"
-                value={formData.iban}
-                onChange={handleInputChange}
-                required
-              />
+            
               <button type="submit" className="submit-btn">
                 Завершити верифікацію
               </button>
