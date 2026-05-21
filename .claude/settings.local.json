@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git reset:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(git push:*)",
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Bash(xargs grep:*)",
+      "Bash(node -e \"require\\('puppeteer'\\)\")",
+      "Bash(npx --yes playwright --version)",
+      "Bash(node:*)",
+      "Bash(npx vitest:*)"
+    ]
+  }
+}

@@ -1,7 +1,10 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AlertCircle, File, X, Upload, CheckCircle, HelpCircle } from 'lucide-react';
 
 const InvoiceCreation = () => {
+  const navigate = useNavigate();
+
   // ============================================================================
   // STATE MANAGEMENT
   // ============================================================================
@@ -284,25 +287,7 @@ const InvoiceCreation = () => {
         filesCount: uploadedFiles.length,
       });
 
-      setSubmitStatus({
-        type: 'success',
-        message: 'Invoice created successfully!',
-      });
-
-      // Reset form after 2 seconds
-      setTimeout(() => {
-        setFormData({
-          amountNeeded: '',
-          profitAmount: '',
-          dueDate: '',
-          repaymentDay: '',
-          comment: '',
-          agreedToTerms: false,
-        });
-        setUploadedFiles([]);
-        setErrors({});
-        setSubmitStatus(null);
-      }, 2000);
+      navigate('/invoice-success');
     } catch (error) {
       console.error('Submission error:', error);
       setSubmitStatus({
@@ -348,7 +333,7 @@ const InvoiceCreation = () => {
         </header>
 
         {/* ====== MAIN CONTENT ====== */}
-        <main className="max-w-4xl mx-auto px-4 py-12">
+        <main className="max-w-4xl mx-auto px-4 py-12" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
           {/* Form Card */}
           <div className="bg-white rounded-2xl shadow-2xl backdrop-blur-xl overflow-hidden">
             {/* Card Header */}
@@ -405,7 +390,7 @@ const InvoiceCreation = () => {
                     value={formData.amountNeeded}
                     onChange={handleInputChange}
                     disabled={isLoading}
-                    className={`w-full px-4 py-3 border-2 rounded-lg font-mono text-lg transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg font-mono text-lg text-gray-900 transition-colors ${
                       errors.amountNeeded
                         ? 'border-red-500 bg-red-50 focus:outline-none'
                         : 'border-gray-300 bg-white focus:border-purple-500 focus:bg-white'
@@ -437,7 +422,7 @@ const InvoiceCreation = () => {
                     value={formData.profitAmount}
                     onChange={handleInputChange}
                     disabled={isLoading}
-                    className={`w-full px-4 py-3 border-2 rounded-lg font-mono text-lg transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg font-mono text-lg text-gray-900 transition-colors ${
                       errors.profitAmount
                         ? 'border-red-500 bg-red-50 focus:outline-none'
                         : 'border-gray-300 bg-white focus:border-purple-500 focus:bg-white'
@@ -466,7 +451,7 @@ const InvoiceCreation = () => {
                     value={formData.dueDate}
                     onChange={handleInputChange}
                     disabled={isLoading}
-                    className={`w-full px-4 py-3 border-2 rounded-lg transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg text-gray-900 transition-colors ${
                       errors.dueDate
                         ? 'border-red-500 bg-red-50 focus:outline-none'
                         : 'border-gray-300 bg-white focus:border-purple-500 focus:bg-white'
@@ -492,7 +477,7 @@ const InvoiceCreation = () => {
                     value={formData.repaymentDay}
                     onChange={handleInputChange}
                     disabled={isLoading}
-                    className={`w-full px-4 py-3 border-2 rounded-lg transition-colors ${
+                    className={`w-full px-4 py-3 border-2 rounded-lg text-gray-900 transition-colors ${
                       errors.repaymentDay
                         ? 'border-red-500 bg-red-50 focus:outline-none'
                         : 'border-gray-300 bg-white focus:border-purple-500 focus:bg-white'
@@ -523,7 +508,7 @@ const InvoiceCreation = () => {
                   disabled={isLoading}
                   maxLength={500}
                   rows="4"
-                  className={`w-full px-4 py-3 border-2 rounded-lg font-sans resize-none transition-colors ${
+                  className={`w-full px-4 py-3 border-2 rounded-lg font-sans resize-none text-gray-900 transition-colors ${
                     errors.comment
                       ? 'border-red-500 bg-red-50 focus:outline-none'
                       : 'border-gray-300 bg-white focus:border-purple-500 focus:bg-white'

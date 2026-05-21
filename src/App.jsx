@@ -7,6 +7,9 @@ import Dashboard from './components/Dashboard';
 import Messages from './components/Messages';
 import Profile from './components/Profile';
 import Notifications from './components/Notifications';
+import InvoiceCreation from './components/Invoicecreation';
+import GetPayoutPage from './components/Getpayoutmodal';
+import SuccessScreen from './components/SuccessScreen';
 import './App.css';
 
 function App() {
@@ -21,7 +24,9 @@ function App() {
         <Route path="/messages" element={<Messages />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/notifications" element={<Notifications />} />
-        <Route path="/create-invoice" element={<div className="text-white p-10"><h1>Invoice Page</h1></div>} />
+        <Route path="/create-invoice" element={<InvoiceCreation />} />
+        <Route path="/invoice-success" element={<SuccessScreen />} />
+        <Route path="/get-payout" element={<GetPayoutPage />} />
       </Routes>
     </Router>
   );

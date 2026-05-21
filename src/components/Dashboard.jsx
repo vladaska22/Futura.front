@@ -41,12 +41,12 @@ const Dashboard = () => {
       </header>
 
       <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '40px', marginTop: '120px' }}>
-        <div style={{ backgroundColor: '#240b45', width: '280px', height: '280px', borderRadius: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', cursor: 'pointer', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
+        <div onClick={() => navigate('/create-invoice')} style={{ backgroundColor: '#240b45', width: '280px', height: '280px', borderRadius: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', cursor: 'pointer', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
           <div style={{ color: '#06b6d4' }}><FileText size={56} /></div>
           <span style={{ fontSize: '22px', fontWeight: 'bold', textAlign: 'center', lineHeight: '1.3' }}>Створити<br />інвойс</span>
         </div>
 
-        <div style={{ backgroundColor: '#240b45', width: '280px', height: '280px', borderRadius: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', cursor: 'pointer', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
+        <div onClick={() => navigate('/get-payout')} style={{ backgroundColor: '#240b45', width: '280px', height: '280px', borderRadius: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', cursor: 'pointer', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
           <div style={{ color: '#eab308' }}><CreditCard size={56} /></div>
           <span style={{ fontSize: '22px', fontWeight: 'bold', textAlign: 'center', lineHeight: '1.3' }}>Отримати<br />виплату</span>
         </div>
