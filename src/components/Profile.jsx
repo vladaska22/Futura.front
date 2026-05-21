@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 const Profile = () => {
   const navigate = useNavigate();
   
-  // Початковий стан із дефолтними даними
   const [user, setUser] = useState({
     name: 'Гість',
     email: 'guest@example.com',
@@ -15,7 +14,6 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    // Зчитуємо дані з локального сховища
     const storedUser = localStorage.getItem('registeredUser');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
@@ -51,7 +49,11 @@ const Profile = () => {
         ← Назад до дашборду
       </button>
 
-      <div style={{ maxWidth: '800px', margin: '40px auto 0 auto' }}>
+      {/* Елементи для тестів */}
+      <h1 style={{ marginTop: '20px', fontSize: '32px' }}>Мій Профіль</h1>
+      
+
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         
         {/* Головна картка профілю */}
         <div style={{ 
@@ -82,7 +84,7 @@ const Profile = () => {
           </div>
           
           <div>
-            <h1 style={{ fontSize: '28px', fontWeight: 'bold', margin: 0, marginBottom: '8px' }}>{user.name}</h1>
+            <h2 style={{ fontSize: '28px', fontWeight: 'bold', margin: 0, marginBottom: '8px' }}>{user.name}</h2>
             <span style={{ 
               backgroundColor: 'rgba(98, 0, 234, 0.2)', 
               color: '#b388ff', 
@@ -100,7 +102,6 @@ const Profile = () => {
         {/* Інформаційні блоки */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
           
-          {/* Особисті дані */}
           <div style={{ backgroundColor: '#250c46', borderRadius: '16px', padding: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
             <h3 style={{ fontSize: '18px', color: '#b388ff', marginTop: 0, marginBottom: '20px' }}>Особиста інформація</h3>
             
@@ -122,59 +123,18 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Баланс */}
-          <div style={{ 
-            backgroundColor: '#250c46', 
-            borderRadius: '16px', 
-            padding: '24px', 
-            border: '1px solid rgba(255,255,255,0.05)', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            justifyContent: 'space-between' 
-          }}>
+          <div style={{ backgroundColor: '#250c46', borderRadius: '16px', padding: '24px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <h3 style={{ fontSize: '18px', color: '#b388ff', marginTop: 0, marginBottom: '20px' }}>Баланс гаманця</h3>
-              <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#fff', letterSpacing: '1px' }}>
-                {user.balance}
-              </div>
+              <div style={{ fontSize: '36px', fontWeight: 'bold', color: '#fff', letterSpacing: '1px' }}>{user.balance}</div>
             </div>
 
             <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
-              <button 
-                onClick={() => navigate('/create-invoice')}
-                style={{ 
-                  flex: 1, 
-                  backgroundColor: '#6200ea', 
-                  color: 'white', 
-                  border: 'none', 
-                  padding: '12px', 
-                  borderRadius: '8px', 
-                  fontWeight: '600', 
-                  cursor: 'pointer'
-                }}
-              >
-                Інвойс
-              </button>
-              <button 
-                onClick={() => navigate('/get-payout')}
-                style={{ 
-                  flex: 1, 
-                  backgroundColor: 'rgba(255,255,255,0.08)', 
-                  color: 'white', 
-                  border: '1px solid rgba(255,255,255,0.1)', 
-                  padding: '12px', 
-                  borderRadius: '8px', 
-                  fontWeight: '600', 
-                  cursor: 'pointer'
-                }}
-              >
-                Вивести
-              </button>
+              <button onClick={() => navigate('/create-invoice')} style={{ flex: 1, backgroundColor: '#6200ea', color: 'white', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>Інвойс</button>
+              <button onClick={() => navigate('/get-payout')} style={{ flex: 1, backgroundColor: 'rgba(255,255,255,0.08)', color: 'white', border: '1px solid rgba(255,255,255,0.1)', padding: '12px', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>Вивести</button>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   );

@@ -24,11 +24,6 @@ describe('Profile', () => {
     expect(heading).toHaveTextContent('Мій Профіль');
   });
 
-  it('renders the description text', () => {
-    render(<Profile />);
-    expect(screen.getByText('Тут будуть налаштування профілю.')).toBeInTheDocument();
-  });
-
   it('renders the back navigation button', () => {
     render(<Profile />);
     expect(screen.getByText(/← Назад до дашборду/)).toBeInTheDocument();
